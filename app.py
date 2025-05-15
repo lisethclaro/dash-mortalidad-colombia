@@ -259,10 +259,11 @@ fig_barras_apiladas.update_layout(
 )
 
 # Crear app Dash
-app = dash.Dash(__name__)
-app.title = "Mortalidad Colombia 2019"
+dash_app = dash.Dash(__name__)
+app = dash_app.server  # Esto es lo que Gunicorn necesita
+dash_app.title = "Mortalidad Colombia 2019"
 
-app.layout = html.Div([
+dash_app.layout  = html.Div([
     html.H1("Análisis de Mortalidad en Colombia (2019)"),
     
     dcc.Tabs([
@@ -300,4 +301,4 @@ app.layout = html.Div([
 ])
 
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", port=8080, debug=False)
+    dash_app.run_server(host="0.0.0.0", port=8080, debug=False)
